@@ -12,13 +12,32 @@ const props = defineProps({
 		type: String,
 		default: "#",
 	},
+	isCount: {
+		type: Boolean,
+		default: false,
+	},
+	count: {
+		type: Number,
+		default: 0,
+	},
+	accent: {
+		type: Boolean,
+		default: false,
+	},
 });
 </script>
 
 <template>
 	<div class="ui-link">
-		<component :is="icon" class="ui-link__icon" />
-		<a :href="link" class="ui-link__text">
+		<div v-if="icon" class="ui-link__icon">
+			<component :is="icon" class="ui-link__icon" />
+			<span v-if="isCount">{{ count }}</span>
+		</div>
+		<a
+			:href="link"
+			class="ui-link__text"
+			:class="{ 'ui-link__text--accent': accent }"
+		>
 			<slot />
 		</a>
 		<IconsInfo v-if="info" class="ui-link__info" />
@@ -28,6 +47,7 @@ const props = defineProps({
 <style lang="scss" scoped>
 .ui-link {
 	position: relative;
+	width: max-content;
 	transition: all 0.3s ease;
 	cursor: pointer;
 	@include flex(center, stretch, 5px);
@@ -41,9 +61,24 @@ const props = defineProps({
 	}
 
 	&__icon {
+		position: relative;
 		width: 20px;
 		height: 20px;
 		fill: currentColor;
+
+		span {
+			position: absolute;
+			top: -5px;
+			right: -7px;
+			width: 15px;
+			height: 15px;
+			font-size: 9px;
+			line-height: 15px;
+			color: $white;
+			background-color: $accent;
+			border-radius: 50%;
+			@include flex(center, center);
+		}
 	}
 
 	&__text {
@@ -65,6 +100,10 @@ const props = defineProps({
 			height: 1px;
 			background-color: $text;
 			transition: all 0.3s ease;
+		}
+
+		&--accent {
+			color: $red;
 		}
 	}
 
