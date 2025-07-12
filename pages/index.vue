@@ -1,7 +1,9 @@
 <script setup></script>
 
 <template>
-	<div></div>
+	<div>
+		<Slider />
+	</div>
 </template>
 
 <style lang="scss"></style>
