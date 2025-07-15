@@ -2,7 +2,7 @@
 
 <template>
 	<div>
-		<Slider />
+		<HeroSection />
 	</div>
 </template>
 

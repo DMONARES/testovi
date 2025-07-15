@@ -2,11 +2,12 @@
 const containerRef = ref(null);
 const swiper = useSwiper(containerRef);
 
-const slides = [
-	{ id: 1, image: "/img/slider-image.png" },
-	{ id: 2, image: "/img/slider-image.png" },
-	{ id: 3, image: "/img/slider-image.png" },
-];
+const props = defineProps({
+	slides: {
+		type: Array,
+		required: true,
+	},
+});
 </script>
 
 <template>
@@ -39,12 +40,7 @@ const slides = [
 	position: relative;
 	max-width: 750px;
 
-	&__wrapper {
-		pointer-events: auto;
-	}
-
-	&__slide {
-	}
+	&__wrapper { pointer-events: auto; }
 
 	&__nav {
 		position: absolute;
@@ -58,9 +54,7 @@ const slides = [
 		z-index: 10;
 		pointer-events: none;
 
-		&-button {
-			pointer-events: auto;
-		}
+		&-button { pointer-events: auto; }
 	}
 }
 </style>
